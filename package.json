@@ -1,0 +1,27 @@
+{
+  "name": "git-snapshot",
+  "version": "1.0.0",
+  "description": "Take a snapshot of the directory - like 'git subtree split --squash'",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mob-sakai/git-snapshot.git"
+  },
+  "keywords": [
+    "shell",
+    "console",
+    "cli",
+    "git",
+    "subtree",
+    "split",
+    "snapshot"
+  ],
+  "author": "mob-sakai <sakai861104@gmail.com> (https://github.com/mob-sakai)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mob-sakai/git-snapshot/issues"
+  },
+  "homepage": "https://github.com/mob-sakai/git-snapshot#readme",
+  "bin": {
+    "git-snapshot": "bin/git-snapshot.sh"
+  }
+}
