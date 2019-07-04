@@ -23,5 +23,20 @@
   "homepage": "https://github.com/mob-sakai/git-snapshot#readme",
   "bin": {
     "git-snapshot": "bin/git-snapshot.sh"
+  },
+  "scripts": {
+    "release": "release-it"
+  },
+  "devDependencies": {
+    "@release-it/conventional-changelog": "^1.1.0",
+    "release-it": "^12.3.0"
+  },
+  "release-it": {
+    "plugins": {
+      "@release-it/conventional-changelog": {
+        "preset": "angular",
+        "infile": "CHANGELOG.md"
+      }
+    }
   }
 }
