@@ -1,6 +1,6 @@
 {
   "name": "git-snapshot",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Take a snapshot of the directory - like 'git subtree split --squash'",
   "repository": {
     "type": "git",
