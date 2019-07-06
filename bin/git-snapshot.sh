@@ -43,8 +43,7 @@ done
 
 # 1. << Stash before task >>
 current_branch=`git rev-parse --abbrev-ref HEAD`
-changed=`git status --porcelain`
-[ -n "${changed}" ] && git add -A && git stash
+git stash -u
 
 
 # 2. << Take a snapshot of the files >>
@@ -70,4 +69,4 @@ git add -A
 
 # 6. << Stash pop after task >>
 git checkout -f "$current_branch"
-[ -n "${changed}" ] && git stash pop && git reset HEAD .
+git stash pop stash@{0}
