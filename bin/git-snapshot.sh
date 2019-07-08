@@ -43,7 +43,9 @@ done
 
 # 1. << Stash before task >>
 current_branch=`git rev-parse --abbrev-ref HEAD`
-git stash -u
+stash_count=`git stash list | wc -l | tr -d ' '`
+git stash save -u
+[ ${stash_count} != `git stash list | wc -l | tr -d ' '` ] && stash_saved=true
 
 
 # 2. << Take a snapshot of the files >>
@@ -69,4 +71,4 @@ git add -A
 
 # 6. << Stash pop after task >>
 git checkout -f "$current_branch"
-git stash pop stash@{0}
+[ "$stash_saved" ] && git stash pop stash@{0}
