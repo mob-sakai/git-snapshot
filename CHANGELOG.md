@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/mob-sakai/git-snapshot/compare/1.1.0...1.1.1) (2019-07-09)
+
+
+### Bug Fixes
+
+* Failed to move file ([ae39e79](https://github.com/mob-sakai/git-snapshot/commit/ae39e79))
+
 # [1.1.0](https://github.com/mob-sakai/git-snapshot/compare/1.0.2...1.1.0) (2019-07-09)
 
 
