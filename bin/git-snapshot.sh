@@ -7,9 +7,11 @@ fi
 
 OPTS_SPEC="\
 git-snapshot   --prefix=<prefix> --message=<message> --branch=<branch>
-git-snapshot   --p <prefix> --m <message> --b <branch>
+git-snapshot   -p <prefix> -m <message> -b <branch>
+git-snapshot   -v
 --
 h,help        show the help
+v,version     print git-snapshot version
 p,prefix=     the name of the subdir to split out
 m,message=    commit message
 b,branch=     branch for split to
@@ -28,8 +30,13 @@ do
 		message="$1" && shift;;
 	-b)
 		branch="$1" && shift;;
+	-v)
+		version=`npm list git-snapshot --depth=0 | grep git-snapshot`
+		[ -e "$version" ] && version=`npm list git-snapshot --depth=0 -g | grep git-snapshot`
+		echo $version | sed -e 's/.*git-snapshot@\([0-9\.]*\).*/\1/'
+		exit 0;;
 	-h)
-    echo ${OPTS_SPEC} && exit 0;;
+    	echo ${OPTS_SPEC} && exit 0;;
 	--)
 		break;;
 	*)
