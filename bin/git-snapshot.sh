@@ -68,7 +68,7 @@ git rm -rf --ignore-unmatch *
 
 
 # 4. << restore the snapshot >>
-mv -f ${tmp}/* .
+cp -rf ${tmp}/* .
 
 
 # 5. << commit changes >>
