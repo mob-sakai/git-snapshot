@@ -1,3 +1,10 @@
+## [1.1.2](https://github.com/mob-sakai/git-snapshot/compare/1.1.1...1.1.2) (2019-07-16)
+
+
+### Bug Fixes
+
+* exit code ([7edcec5](https://github.com/mob-sakai/git-snapshot/commit/7edcec5))
+
 ## [1.1.1](https://github.com/mob-sakai/git-snapshot/compare/1.1.0...1.1.1) (2019-07-09)
 
 
