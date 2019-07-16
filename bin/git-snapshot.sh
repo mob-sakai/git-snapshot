@@ -79,3 +79,5 @@ git add -A
 # 6. << Stash pop after task >>
 git checkout -f "$current_branch"
 [ "$stash_saved" ] && git stash pop stash@{0}
+
+exit 0
