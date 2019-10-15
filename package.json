@@ -22,21 +22,39 @@
   },
   "homepage": "https://github.com/mob-sakai/git-snapshot#readme",
   "bin": {
-    "git-snapshot": "bin/git-snapshot.sh"
+    "git-snapshot": "bin/cli.js"
   },
   "scripts": {
-    "release": "release-it"
+    "release": "semantic-release"
+  },
+  "engines": {
+    "node": ">=8"
+  },
+  "dependencies": {
+    "chalk": "^2.4.2",
+    "debug": "^4.0.0",
+    "execa": "^2.0.2",
+    "fs-extra": "^8.0.0",
+    "tempy": "^0.3.0",
+    "yargs": "^14.2.0"
   },
   "devDependencies": {
-    "@release-it/conventional-changelog": "^1.1.0",
-    "release-it": "^12.3.0"
+    "prettier": "^1.18.2",
+    "semantic-release": "^16.0.0-beta.26"
   },
-  "release-it": {
-    "plugins": {
-      "@release-it/conventional-changelog": {
-        "preset": "angular",
-        "infile": "CHANGELOG.md"
-      }
-    }
+  "prettier": {
+    "printWidth": 120,
+    "singleQuote": true
+  },
+  "release": {
+    "ci": false,
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      "@semantic-release/changelog",
+      "@semantic-release/git",
+      "@semantic-release/npm",
+      "@semantic-release/github"
+    ]
   }
 }
