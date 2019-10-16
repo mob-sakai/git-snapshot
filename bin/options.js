@@ -67,3 +67,4 @@ const yargs = require('yargs')
   .demandOption(['prefix', 'message', 'branch']);
 
 module.exports = yargs;
+

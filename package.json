@@ -25,6 +25,7 @@
     "git-snapshot": "bin/cli.js"
   },
   "scripts": {
+    "test": "echo tested!",
     "release": "semantic-release",
     "release-test": "semantic-release --dry-run"
   },
@@ -43,7 +44,7 @@
     "@semantic-release/changelog": "^3.0.4",
     "@semantic-release/commit-analyzer": "7.0.0-beta.4",
     "@semantic-release/error": "^2.2.0",
-    "@semantic-release/git": "^7.0.16",
+    "@semantic-release/git": "^7.1.0-beta.7",
     "@semantic-release/github": "5.6.0-beta.1",
     "@semantic-release/npm": "^6.0.0-bata.2",
     "@semantic-release/release-notes-generator": "^7.1.2",
