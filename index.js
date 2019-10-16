@@ -71,9 +71,9 @@ module.exports = function gitSnapshot(argv) {
       .then(async () => {
         if (argv.dryRun) return;
 
-        debug(`Remove/copy all files in directory:`);
+        debug(`Remove/copy all files in directory: ${argv.prefix}`);
         await git(['rm', '-rf', '--ignore-unmatch', '.'], onWorktreeOpts);
-        await fs.copy(path.join(cwd, argv.prefix), worktreePath);
+        await fs.copy(path.join(argv.cwd, argv.prefix), worktreePath);
       })
 
       // Commit files.
