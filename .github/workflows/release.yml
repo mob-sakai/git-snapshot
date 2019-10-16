@@ -8,10 +8,12 @@ on:
       - master
     tags:
       - '!*'
+  pull_request:
+    branches:
+      - '*'
 
 jobs:
   release:
-    if: contains(toJSON(github), '[skip ci]') == false
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
@@ -26,7 +28,14 @@ jobs:
       - name: Test
         run: npm test
 
+      - name: Release Test
+        run: npm run release -- --dry-run
+        env:
+          NPM_TOKEN: ${{secrets.NPM_TOKEN}}
+          GH_TOKEN: ${{secrets.GH_TOKEN}}
+
       - name: Release
+        if: github.event_name == 'push'
         run: npm run release
         env:
           NPM_TOKEN: ${{secrets.NPM_TOKEN}}
