@@ -91,4 +91,4 @@ MIT
 - GitHub page : https://github.com/mob-sakai/git-snapshot
 - npm page : https://www.npmjs.com/package/git-snapshot
 
-[![Patreon](https://c5.patreon.com/external/logo/become_a_patron_button.png)](https://www.patreon.com/join/2343451?)
+[![become_a_sponsor_on_github](https://user-images.githubusercontent.com/12690315/66942881-03686280-f085-11e9-9586-fc0b6011029f.png)](https://github.com/users/mob-sakai/sponsorship)
