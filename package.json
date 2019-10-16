@@ -53,7 +53,8 @@
     "@semantic-release/npm": "^6.0.0-bata.2",
     "@semantic-release/release-notes-generator": "^7.1.2",
     "prettier": "^1.18.2",
-    "semantic-release": "^16.0.0-beta.26"
+    "semantic-release": "^16.0.0-beta.26",
+    "xo": "^0.25.3"
   },
   "prettier": {
     "printWidth": 120,
@@ -69,5 +70,9 @@
       "@semantic-release/git",
       "@semantic-release/github"
     ]
+  },
+  "xo": {
+    "prettier": true,
+    "space": true
   }
 }
