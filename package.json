@@ -26,8 +26,7 @@
   },
   "scripts": {
     "test": "echo tested!",
-    "release": "semantic-release",
-    "release-test": "semantic-release --dry-run"
+    "release": "semantic-release"
   },
   "engines": {
     "node": ">=8"
