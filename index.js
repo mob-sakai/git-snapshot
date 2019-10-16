@@ -35,7 +35,8 @@ module.exports = function gitSnapshot(argv) {
             .catch(() => false)
             .then(exists => {
               if (exists) {
-                throw { all: `tag '${argv.tag}' already exists` };
+                const message = `tag '${argv.tag}' already exists`
+                throw { all: message, message,  };
               }
             });
         }
