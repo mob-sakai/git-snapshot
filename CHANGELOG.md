@@ -1,3 +1,10 @@
+# [2.0.0-beta.4](https://github.com/mob-sakai/git-snapshot/compare/v2.0.0-beta.3@beta...v2.0.0-beta.4@beta) (2019-10-16)
+
+
+### Features
+
+* test build ([0a1ddb9](https://github.com/mob-sakai/git-snapshot/commit/0a1ddb9b5f9ddf3a94c218c6840d5ef45438cccf))
+
 # [2.0.0-beta.3](https://github.com/mob-sakai/git-snapshot/compare/v2.0.0-beta.2@beta...v2.0.0-beta.3@beta) (2019-10-16)
 
 
