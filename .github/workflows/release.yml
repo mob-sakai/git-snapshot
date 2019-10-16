@@ -11,6 +11,7 @@ on:
 
 jobs:
   release:
+    if: contains(toJSON(github), '[skip ci]') == false
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
