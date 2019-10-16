@@ -31,6 +31,11 @@
   "engines": {
     "node": ">=8"
   },
+  "files": [
+    "bin",
+    "lib",
+    "index.js"
+  ],
   "dependencies": {
     "chalk": "^2.4.2",
     "debug": "^4.0.0",

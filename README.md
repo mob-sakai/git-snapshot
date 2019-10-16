@@ -2,7 +2,6 @@
 
 ![npm](https://img.shields.io/npm/v/git-snapshot)
 ![npm (beta)](https://img.shields.io/npm/v/git-snapshot/beta)
-![node](https://img.shields.io/node/v/git-snapshot)
 ![NPM](https://img.shields.io/npm/l/git-snapshot)
 ![npm](https://img.shields.io/npm/dy/git-snapshot)
 ![npm](https://github.com/mob-sakai/git-snapshot/workflows/CI/badge.svg)

@@ -1,4 +1,4 @@
-name: CI
+name: release
 
 on:
   push:
@@ -8,8 +8,6 @@ on:
       - master
     tags:
       - '!*'
-    paths:
-      - '**.js'
 
 jobs:
   release:
