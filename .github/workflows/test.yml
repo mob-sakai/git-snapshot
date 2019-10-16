@@ -13,8 +13,14 @@ jobs:
         with:
           node-version: 12
 
-      - name: Install npm packages for CI
-        run: npm ci
+      - name: Install
+        run: npm i
 
       - name: Test
         run: npm test
+
+      - name: Release Test
+        run: npm run release -- --dry-run
+        env:
+          NPM_TOKEN: ${{secrets.NPM_TOKEN}}
+          GH_TOKEN: ${{secrets.GH_TOKEN}}

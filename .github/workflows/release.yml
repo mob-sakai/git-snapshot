@@ -8,9 +8,6 @@ on:
       - master
     tags:
       - '!*'
-  pull_request:
-    branches:
-      - '*'
 
 jobs:
   release:
@@ -22,8 +19,8 @@ jobs:
         with:
           node-version: 12
 
-      - name: Install npm packages for CI
-        run: npm ci
+      - name: Install
+        run: npm i
 
       - name: Test
         run: npm test
@@ -35,7 +32,6 @@ jobs:
           GH_TOKEN: ${{secrets.GH_TOKEN}}
 
       - name: Release
-        if: github.event_name == 'push'
         run: npm run release
         env:
           NPM_TOKEN: ${{secrets.NPM_TOKEN}}
