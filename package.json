@@ -7,8 +7,8 @@
     "url": "https://github.com/mob-sakai/git-snapshot.git"
   },
   "keywords": [
-    "shell",
-    "console",
+    "module",
+    "package",
     "cli",
     "git",
     "subtree",
@@ -25,6 +25,7 @@
     "git-snapshot": "bin/cli.js"
   },
   "scripts": {
+    "lint": "xo",
     "test": "ava --verbose",
     "release": "semantic-release"
   },
