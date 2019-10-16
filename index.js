@@ -3,7 +3,7 @@ const debug = require('debug')('git-snapshot');
 const fs = require('fs-extra');
 const path = require('path');
 const tempy = require('tempy');
-const git = require('./bin/git');
+const git = require('./lib/git');
 
 module.exports = function gitSnapshot(argv) {
   var isAddedWorktree = false;
