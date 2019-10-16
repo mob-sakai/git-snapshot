@@ -1,5 +1,13 @@
 # git-snapshot
 
+![npm](https://img.shields.io/npm/v/git-snapshot)
+![npm (beta)](https://img.shields.io/npm/v/git-snapshot/beta)
+![node](https://img.shields.io/node/v/git-snapshot)
+![NPM](https://img.shields.io/npm/l/git-snapshot)
+![npm](https://img.shields.io/npm/dy/git-snapshot)
+![npm](https://github.com/mob-sakai/git-snapshot/workflows/CI/badge.svg)
+
+
 `git-snapshot` is a command-line tool to take a snapshot of the directory and creates/updates another branch, like `git subtree split --squash`.
 
 - `git-snapshot` uses `git`
