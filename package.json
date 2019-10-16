@@ -1,6 +1,6 @@
 {
   "name": "git-snapshot",
-  "version": "1.1.2",
+  "version": "2.0.0-beta.4",
   "description": "Take a snapshot of the directory - like 'git subtree split --squash'",
   "repository": {
     "type": "git",
@@ -22,21 +22,52 @@
   },
   "homepage": "https://github.com/mob-sakai/git-snapshot#readme",
   "bin": {
-    "git-snapshot": "bin/git-snapshot.sh"
+    "git-snapshot": "bin/cli.js"
   },
   "scripts": {
-    "release": "release-it"
+    "test": "echo tested!",
+    "release": "semantic-release"
+  },
+  "engines": {
+    "node": ">=8"
+  },
+  "files": [
+    "bin",
+    "lib",
+    "index.js"
+  ],
+  "dependencies": {
+    "chalk": "^2.4.2",
+    "debug": "^4.0.0",
+    "execa": "^2.0.2",
+    "fs-extra": "^8.0.0",
+    "tempy": "^0.3.0",
+    "yargs": "^14.2.0"
   },
   "devDependencies": {
-    "@release-it/conventional-changelog": "^1.1.0",
-    "release-it": "^12.3.0"
+    "@semantic-release/changelog": "^3.0.4",
+    "@semantic-release/commit-analyzer": "7.0.0-beta.4",
+    "@semantic-release/error": "^2.2.0",
+    "@semantic-release/git": "^7.1.0-beta.7",
+    "@semantic-release/github": "5.6.0-beta.1",
+    "@semantic-release/npm": "^6.0.0-bata.2",
+    "@semantic-release/release-notes-generator": "^7.1.2",
+    "prettier": "^1.18.2",
+    "semantic-release": "^16.0.0-beta.26"
   },
-  "release-it": {
-    "plugins": {
-      "@release-it/conventional-changelog": {
-        "preset": "angular",
-        "infile": "CHANGELOG.md"
-      }
-    }
+  "prettier": {
+    "printWidth": 120,
+    "singleQuote": true
+  },
+  "release": {
+    "ci": false,
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      "@semantic-release/changelog",
+      "@semantic-release/npm",
+      "@semantic-release/git",
+      "@semantic-release/github"
+    ]
   }
 }

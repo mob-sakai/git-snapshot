@@ -1,0 +1,33 @@
+name: release
+
+on:
+  push:
+    branches:
+      - alpha
+      - beta
+      - master
+    tags:
+      - '!*'
+
+jobs:
+  release:
+    if: contains(toJSON(github), '[skip ci]') == false
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+
+      - name: Install npm packages for CI
+        run: npm ci
+
+      - name: Test
+        run: npm test
+
+      - name: Release
+        run: npm run release
+        env:
+          NPM_TOKEN: ${{secrets.NPM_TOKEN}}
+          GH_TOKEN: ${{secrets.GH_TOKEN}}
