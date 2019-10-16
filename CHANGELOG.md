@@ -1,3 +1,17 @@
+# [2.0.0-beta.2](https://github.com/mob-sakai/git-snapshot/compare/v2.0.0-beta.1@beta...v2.0.0-beta.2@beta) (2019-10-16)
+
+
+### Bug Fixes
+
+* Exception object ([d0d2b1a](https://github.com/mob-sakai/git-snapshot/commit/d0d2b1a7c7287ee6d892a17bc36c9c59101e2023))
+* Prefix dir ([7600e99](https://github.com/mob-sakai/git-snapshot/commit/7600e996536860c9d50c8fb2109cf199b423792f))
+
+
+### Features
+
+* Check --prefix and --cwd options ([8566a9f](https://github.com/mob-sakai/git-snapshot/commit/8566a9fcf984908211b21e1145aa28ac3071c5b9))
+* Support dry-run mode ([53c5ec0](https://github.com/mob-sakai/git-snapshot/commit/53c5ec0e85051ee31df6d16a144df62899637849))
+
 # [2.0.0-beta.1](https://github.com/mob-sakai/git-snapshot/compare/v1.1.2...v2.0.0-beta.1@beta) (2019-10-16)
 
 
