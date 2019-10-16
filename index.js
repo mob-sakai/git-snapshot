@@ -14,12 +14,29 @@ module.exports = function gitSnapshot(argv) {
   const refs = argv.remote ? `refs/remotes/${argv.remote}/${argv.branch}` : `refs/heads/${argv.branch}`;
   var onCwdOpts = { cwd: argv.cwd };
   var onWorktreeOpts = { cwd: worktreePath };
+  const prefix = path.join(argv.cwd, argv.prefix);
   const forceOpt = argv.force ? '--force' : '';
   const commitOpt = (argv.auther ? ['--auther', argv.auther] : []) //
     .concat(argv.force ? ['--allow-empty', '--allow-empty-message'] : []);
 
+  debug(`argv: ${JSON.stringify(argv)}`);
+
   return (
     Promise.resolve()
+
+      // Check that cwd and prefix directory exist.
+      .then(async () => {
+        debug(`Check that cwd and prefix directory exist: ${argv.cwd} ${argv.prefix}`);
+        if (!fs.pathExistsSync(argv.cwd)) {
+          const message = `cwd directory '${argv.cwd}' is not found`;
+          throw { all: message, message };
+        }
+        if (!fs.pathExistsSync(prefix)) {
+          const message = `prefix directory '${prefix}' is not found`;
+          throw { all: message, message };
+        }
+      })
+
       // Check permissions for remote branch.
       .then(async () => {
         if (!argv.remote) return;
