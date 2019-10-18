@@ -1,3 +1,10 @@
+# [2.1.0-beta.1](https://github.com/mob-sakai/git-snapshot/compare/v2.0.0...v2.1.0-beta.1@beta) (2019-10-18)
+
+
+### Features
+
+* Remove allow-empty option ([0cbb763](https://github.com/mob-sakai/git-snapshot/commit/0cbb7631a54dee2958de11abd073e71ea623b4cf))
+
 # [2.0.0](https://github.com/mob-sakai/git-snapshot/compare/v1.1.2...v2.0.0) (2019-10-16)
 
 
