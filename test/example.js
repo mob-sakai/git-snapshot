@@ -1,24 +1,23 @@
 import test from 'ava';
 
-// basic
+// Basic
 test('example', t => {
   t.pass();
 });
 
-// sync
+// Sync
 test('sync', async t => {
   const bar = Promise.resolve('bar');
 
   t.is(await bar, 'bar');
 });
 
-// async
+// Async
 test('async', t => {
   const bar = 'abcd';
 
-  t.is(bar.substr(1), 'bcd');
+  t.is(bar.slice(1), 'bcd');
 });
-
 
 test('pass', t => {
   t.pass(); // 絶対成立
@@ -49,9 +48,10 @@ test('regex/notRegex', t => {
   t.notRegex('abc', /cd/);
 });
 
-
 test.serial('serial 1', async t => {
-    const efg = Promise.resolve('efg')
-    t.is(await efg, 'efg')
-  })
-  test.serial('serial 2', t => t.pass())
+  const efg = Promise.resolve('efg');
+  t.is(await efg, 'efg');
+});
+test.serial('serial 2', t => {
+  t.pass();
+});
