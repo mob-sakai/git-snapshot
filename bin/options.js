@@ -23,10 +23,6 @@ const yargs = require('yargs')
     type: 'string',
     group: 'Required'
   })
-  .option('allow-empty', {
-    describe: 'allow empty commit',
-    type: 'boolean'
-  })
   .option('author', {
     requiresArg: true,
     alias: 'a',

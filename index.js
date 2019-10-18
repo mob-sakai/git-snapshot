@@ -5,99 +5,115 @@ const fs = require('fs-extra');
 const tempy = require('tempy');
 const git = require('./lib/git');
 
+/**
+ * Take a snapshot of the directory and creates/updates another branch, like `git subtree split --squash`.
+ *
+ * @param {String} [pluginConfig.message] The message for the release commit.
+ * @param {Object} argv git-snapshot options.
+ * @param {String} argv.prefix the name of the subdir to split out
+ * @param {String} argv.branch the name of branch for split to
+ * @param {String} argv.message commit message
+ * @param {String} argv.author override the commit author
+ * @param {Boolean} argv.force allow force commit, tag, push
+ * @param {String} argv.tag tag name
+ * @param {String} argv.remote remote repository
+ * @param {Boolean} argv.dryRun skip publishing
+ * @param {String} argv.cwd working directory
+ */
 async function gitSnapshot(argv) {
+  const {prefix, branch, message, auther, force, tag, remote, dryRun, cwd} = argv;
+
   let isAddedWorktree = false;
   let isAddedTag = false;
   let failed = false;
   const worktreePath = tempy.directory();
-  const refs = argv.remote ? `refs/remotes/${argv.remote}/${argv.branch}` : `refs/heads/${argv.branch}`;
+  const refs = remote ? `refs/remotes/${remote}/${branch}` : `refs/heads/${branch}`;
   const onCwdOpts = {
-    cwd: argv.cwd
+    cwd
   };
   const onWorktreeOpts = {
     cwd: worktreePath
   };
-  const prefix = path.join(argv.cwd, argv.prefix);
-  const forceOpt = argv.force ? '--force' : '';
-  const commitOpt = (argv.auther ? ['--auther', argv.auther] : []) //
-    .concat(argv.force ? ['--allow-empty', '--allow-empty-message'] : []);
+  const autherOpt = auther ? ['--auther', auther] : [];
+  const prefixPath = path.join(cwd, prefix);
+  const forceOpt = force ? '--force' : '';
 
   debug(`argv: ${JSON.stringify(argv)}`);
 
   try {
     // Check that cwd and prefix directory exist.
-    debug(`Check that cwd and prefix directory exist: ${argv.cwd} ${argv.prefix}`);
-    if (!fs.pathExistsSync(argv.cwd)) {
-      throw new Error(`cwd directory '${argv.cwd}' is not found`);
-    } else if (!fs.pathExistsSync(prefix)) {
-      throw new Error(`prefix directory '${prefix}' is not found`);
+    debug(`Check that cwd and prefix directory exist: ${cwd} ${prefix}`);
+    if (!fs.pathExistsSync(cwd)) {
+      throw new Error(`cwd directory '${cwd}' is not found`);
+    } else if (!fs.pathExistsSync(prefixPath)) {
+      throw new Error(`prefix directory '${prefixPath}' is not found`);
     }
 
     // Check permissions for remote branch.
-    if (argv.remote) {
-      debug(`Check permissions for remote branch: ${argv.remote} ${argv.branch}`);
-      await git(['push', '--dry-run', '-f', argv.remote, argv.branch], onCwdOpts);
-      await git(['fetch', argv.remote], onCwdOpts);
+    if (remote) {
+      debug(`Check permissions for remote branch: ${remote} ${branch}`);
+      await git(['push', '--dry-run', '-f', remote, branch], onCwdOpts);
+      await git(['fetch', remote], onCwdOpts);
     }
 
     // Check that the tag does not exist.
-    if (argv.tag && !argv.force) {
-      debug(`Check that the tag does not exist: ${argv.tag}`);
-      await git(['show-ref', '--verify', `refs/tags/${argv.tag}`], onCwdOpts)
+    if (tag && !force) {
+      debug(`Check that the tag does not exist: ${tag}`);
+      await git(['show-ref', '--verify', `refs/tags/${tag}`], onCwdOpts)
         .catch(() => false)
         .then(exists => {
           if (exists) {
-            throw new Error(`tag '${argv.tag}' already exists`);
+            throw new Error(`tag '${tag}' already exists`);
           }
         });
     }
 
     // In dry-run mode, return.
-    if (argv.dryRun) return;
+    if (dryRun) return;
 
     // Add worktree for the task.
-    debug(`Check that the tag does not exist: ${argv.tag}`);
+    debug(`Check that the tag does not exist: ${tag}`);
     await git(['worktree', 'add', '--detach', worktreePath], onCwdOpts);
     isAddedWorktree = true;
 
     // Checkout working branch.
     debug(`Checkout working branch: ${onWorktreeOpts.cwd}`);
-    await git(['checkout', '-B', argv.branch, refs], onWorktreeOpts) //
+    await git(['checkout', '-B', branch, refs], onWorktreeOpts) //
       .catch(async () => {
-        await git(['checkout', '-B', argv.branch, `refs/heads/${argv.branch}`], onWorktreeOpts) //
+        await git(['checkout', '-B', branch, `refs/heads/${branch}`], onWorktreeOpts) //
           .catch(async () => {
-            await git(['checkout', '--orphan', argv.branch], onWorktreeOpts);
+            await git(['checkout', '--orphan', branch], onWorktreeOpts);
           });
       });
 
     // Remove/copy all files in directory.
-    debug(`Remove/copy all files in directory: ${argv.prefix}`);
+    debug(`Remove/copy all files in directory: ${prefix}`);
     await git(['rm', '-rf', '--ignore-unmatch', '.'], onWorktreeOpts);
-    await fs.copy(path.join(argv.cwd, argv.prefix), worktreePath);
+    await fs.copy(prefixPath, worktreePath);
 
     // Commit files.
     debug(`Commit files:`);
     await git(['add', '-A', '--ignore-errors'], onWorktreeOpts);
-    await git(['commit', '-m', argv.message].concat(commitOpt), onWorktreeOpts);
+    await git(['commit', '--allow-empty', '--allow-empty-message', '-m', message] + autherOpt, onWorktreeOpts);
 
     // Add tag.
-    if (argv.tag) {
-      debug(`Add tag: ${argv.tag}`);
-      await git(['tag', forceOpt, argv.tag], onWorktreeOpts);
+    if (tag) {
+      debug(`Add tag: ${tag}`);
+      await git(['tag', forceOpt, tag], onWorktreeOpts);
       isAddedTag = true;
     }
 
     // Push to remote repository.
-    if (argv.remote) {
-      debug(`Push to remote repository: ${argv.remote} ${argv.branch}`);
-      await git(['push', forceOpt, argv.remote, argv.branch], onWorktreeOpts);
-      if (argv.tag) {
-        await git(['push', forceOpt, argv.remote, argv.tag], onWorktreeOpts);
+    if (remote) {
+      debug(`Push to remote repository: ${remote} ${branch}`);
+      await git(['push', forceOpt, remote, branch], onWorktreeOpts);
+      if (tag) {
+        await git(['push', forceOpt, remote, tag], onWorktreeOpts);
       }
     }
 
     // Completed successflly.
-    console.log(chalk.green(chalk.bold(`completed successflly${argv.dryRun ? ' in dry-run mode' : ''}`)));
+    console.log(chalk.green(chalk.bold(`completed successflly${dryRun ? ' in dry-run mode' : ''}`)));
   } catch (error) {
     failed = true;
     console.error(chalk.red(error.message));
@@ -111,7 +127,7 @@ async function gitSnapshot(argv) {
 
     // Remove added tag.
     if (failed && isAddedTag) {
-      await git(['tag', '-d', argv.tag], onCwdOpts);
+      await git(['tag', '-d', tag], onCwdOpts);
     }
   }
 }
