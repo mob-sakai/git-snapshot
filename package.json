@@ -25,7 +25,7 @@
     "git-snapshot": "bin/cli.js"
   },
   "scripts": {
-    "lint": "xo",
+    "lint": "xo --fix",
     "test": "ava --verbose",
     "release": "semantic-release"
   },
@@ -60,6 +60,7 @@
   },
   "prettier": {
     "printWidth": 120,
+    "bracketSpacing": false,
     "singleQuote": true
   },
   "release": {
