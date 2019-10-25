@@ -1,3 +1,10 @@
+# [2.1.0-beta.2](https://github.com/mob-sakai/git-snapshot/compare/v2.1.0-beta.1@beta...v2.1.0-beta.2@beta) (2019-10-25)
+
+
+### Features
+
+* Add --debug option ([3f4ae24](https://github.com/mob-sakai/git-snapshot/commit/3f4ae24337edcca8921adf7c67a5e85e9b083031))
+
 # [2.1.0-beta.1](https://github.com/mob-sakai/git-snapshot/compare/v2.0.0...v2.1.0-beta.1@beta) (2019-10-18)
 
 
