@@ -51,6 +51,10 @@ const yargs = require('yargs')
     describe: 'skip publishing',
     type: 'boolean'
   })
+  .option('debug', {
+    describe: 'output debugging information',
+    type: 'boolean'
+  })
   .option('cwd', {
     requiresArg: true,
     alias: 'c',
@@ -61,5 +65,10 @@ const yargs = require('yargs')
   .alias('version', 'v')
   .alias('help', 'h')
   .demandOption(['prefix', 'message', 'branch']);
+
+if (yargs.argv.debug) {
+  // Debug must be enabled before other requires in order to work
+  require('debug').enable('git-snapshot:*');
+}
 
 module.exports = yargs;

@@ -1,6 +1,6 @@
 const path = require('path');
 const chalk = require('chalk');
-const debug = require('debug')('git-snapshot');
+const debug = require('debug')('git-snapshot:');
 const fs = require('fs-extra');
 const tempy = require('tempy');
 const git = require('./lib/git');
