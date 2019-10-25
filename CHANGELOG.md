@@ -1,3 +1,11 @@
+# [2.1.0-beta.3](https://github.com/mob-sakai/git-snapshot/compare/v2.1.0-beta.2@beta...v2.1.0-beta.3@beta) (2019-10-25)
+
+
+### Features
+
+* Create temporary branch as working branch ([8947cce](https://github.com/mob-sakai/git-snapshot/commit/8947ccefebc29a772376f115394b2116d356e325))
+* git command output as debug ([2f40aac](https://github.com/mob-sakai/git-snapshot/commit/2f40aac277853dfa0088ca08a7b54c3162978583))
+
 # [2.1.0-beta.2](https://github.com/mob-sakai/git-snapshot/compare/v2.1.0-beta.1@beta...v2.1.0-beta.2@beta) (2019-10-25)
 
 
