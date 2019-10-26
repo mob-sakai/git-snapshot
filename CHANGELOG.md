@@ -1,3 +1,10 @@
+# [2.1.0-beta.4](https://github.com/mob-sakai/git-snapshot/compare/v2.1.0-beta.3@beta...v2.1.0-beta.4@beta) (2019-10-26)
+
+
+### Bug Fixes
+
+* force option is incorrect ([bc4d216](https://github.com/mob-sakai/git-snapshot/commit/bc4d2162f57fd6b1de9f43064d716c1cb6970d25))
+
 # [2.1.0-beta.3](https://github.com/mob-sakai/git-snapshot/compare/v2.1.0-beta.2@beta...v2.1.0-beta.3@beta) (2019-10-25)
 
 
