@@ -1,3 +1,18 @@
+# [2.1.0](https://github.com/mob-sakai/git-snapshot/compare/v2.0.0...v2.1.0) (2019-10-26)
+
+
+### Bug Fixes
+
+* force option is incorrect ([bc4d216](https://github.com/mob-sakai/git-snapshot/commit/bc4d2162f57fd6b1de9f43064d716c1cb6970d25))
+
+
+### Features
+
+* Add --debug option ([3f4ae24](https://github.com/mob-sakai/git-snapshot/commit/3f4ae24337edcca8921adf7c67a5e85e9b083031))
+* Create temporary branch as working branch ([8947cce](https://github.com/mob-sakai/git-snapshot/commit/8947ccefebc29a772376f115394b2116d356e325))
+* git command output as debug ([2f40aac](https://github.com/mob-sakai/git-snapshot/commit/2f40aac277853dfa0088ca08a7b54c3162978583))
+* Remove allow-empty option ([0cbb763](https://github.com/mob-sakai/git-snapshot/commit/0cbb7631a54dee2958de11abd073e71ea623b4cf))
+
 # [2.1.0-beta.4](https://github.com/mob-sakai/git-snapshot/compare/v2.1.0-beta.3@beta...v2.1.0-beta.4@beta) (2019-10-26)
 
 
