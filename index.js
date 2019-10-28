@@ -3,8 +3,7 @@ const chalk = require('chalk');
 const debug = require('debug')('git-snapshot:');
 const fs = require('fs-extra');
 const tempy = require('tempy');
-const ignore = require('ignore')();
-const git = require('./lib/git');
+const {git, gitCheckout, gitCopy} = require('./lib/git');
 
 /**
  * Take a snapshot of the directory and creates/updates another branch, like `git subtree split --squash`.
@@ -59,22 +58,7 @@ async function gitSnapshot(argv) {
 
     // Checkout working branch.
     debug(`Checkout working branch: ${branch} as ${workBranch} on ${onWorktreeOpts.cwd}`);
-    if (remote) {
-      await git(['fetch', remote, branch], onWorktreeOpts); //
-      await git(['checkout', '-B', workBranch, 'FETCH_HEAD'], onWorktreeOpts) //
-        .catch(async () => {
-          await git(['checkout', '-B', workBranch, branch], onWorktreeOpts) //
-            .catch(async () => {
-              await git(['checkout', '--orphan', workBranch], onWorktreeOpts);
-            });
-        });
-    } else {
-      await git(['checkout', '-B', workBranch, branch], onWorktreeOpts) //
-        .catch(async () => {
-          await git(['checkout', '--orphan', workBranch], onWorktreeOpts);
-        });
-    }
-
+    await gitCheckout(branch, workBranch, remote, onWorktreeOpts);
     isAddedWorkBranch = true;
 
     // Check empty commit
@@ -106,30 +90,9 @@ async function gitSnapshot(argv) {
     debug(`Remove/copy all files in directory: ${prefix}`);
     await git(['rm', '-rf', '--ignore-unmatch', '.'], onWorktreeOpts);
 
-    // Create ignore rules from .gitignore.
-    debug('Create ignore rules from `.gitignore`.');
-    ignore.add('.git');
-    const ignoreFilename = path.resolve(prefixPath, '.gitignore');
-    if (fs.exists(ignoreFilename)) {
-      ignore.add(fs.readFileSync(ignoreFilename).toString());
-    } else {
-      const rootDir = await git(['rev-parse', '--show-toplevel'], onCwdOpts);
-      const ignoreFilename = path.resolve(rootDir, '.gitignore');
-      if (fs.exists(ignoreFilename)) {
-        ignore.add(fs.readFileSync(ignoreFilename).toString());
-      }
-    }
-
-    debug(ignore._rules.map(x => chalk.yellow(x.origin)).join(', '));
-
-    // Copy all files.
-    debug('Copy all files');
-    await fs.copy(prefixPath, worktreePath, {
-      filter: (src, _) => {
-        const relativeSrc = path.relative(prefixPath, src);
-        return !relativeSrc || !ignore.ignores(relativeSrc);
-      }
-    });
+    // Copy all files not in .gitignore file.
+    debug('Copy all files not in .gitignore file.');
+    await gitCopy(prefixPath, worktreePath);
 
     // Commit files.
     debug(`Commit files:`);
