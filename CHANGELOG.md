@@ -1,3 +1,10 @@
+# [2.2.0-beta.2](https://github.com/mob-sakai/git-snapshot/compare/v2.2.0-beta.1@beta...v2.2.0-beta.2@beta) (2019-10-28)
+
+
+### Bug Fixes
+
+* Fix async function ([0ebc857](https://github.com/mob-sakai/git-snapshot/commit/0ebc85743ea99fc7a2649f809525bf8b0f3a6951))
+
 # [2.2.0-beta.1](https://github.com/mob-sakai/git-snapshot/compare/v2.1.0...v2.2.0-beta.1@beta) (2019-10-28)
 
 
