@@ -34,7 +34,6 @@ async function gitSnapshot(argv) {
   let failed = false;
   const worktreePath = tempy.directory();
   const workBranch = path.basename(worktreePath);
-  const refs = remote ? `refs/remotes/${remote}/${branch}` : `refs/heads/${branch}`;
   const onCwdOpts = {cwd};
   const onWorktreeOpts = {cwd: worktreePath};
   const autherOpt = auther ? ['--auther', auther] : [];
@@ -57,13 +56,21 @@ async function gitSnapshot(argv) {
 
     // Checkout working branch.
     debug(`Checkout working branch: ${branch} as ${workBranch} on ${onWorktreeOpts.cwd}`);
-    await git(['checkout', '-B', workBranch, refs], onWorktreeOpts) //
-      .catch(async () => {
-        await git(['checkout', '-B', workBranch, `refs/heads/${branch}`], onWorktreeOpts) //
-          .catch(async () => {
-            await git(['checkout', '--orphan', workBranch], onWorktreeOpts);
-          });
-      });
+    if (remote) {
+      await git(['fetch', remote, branch], onWorktreeOpts); //
+      await git(['checkout', '-B', workBranch, 'FETCH_HEAD'], onWorktreeOpts) //
+        .catch(async () => {
+          await git(['checkout', '-B', workBranch, branch], onWorktreeOpts) //
+            .catch(async () => {
+              await git(['checkout', '--orphan', workBranch], onWorktreeOpts);
+            });
+        });
+    } else {
+      await git(['checkout', '-B', workBranch, branch], onWorktreeOpts) //
+        .catch(async () => {
+          await git(['checkout', '--orphan', workBranch], onWorktreeOpts);
+        });
+    }
     isAddedWorkBranch = true;
 
     // Check empty commit
@@ -72,14 +79,14 @@ async function gitSnapshot(argv) {
     // Check permissions for remote branch.
     if (remote) {
       debug(`Check permissions for remote: \`${remote}\` ${branch}`);
-      await git(['fetch', remote], onCwdOpts);
-      await git(['push', '--dry-run', '-f', remote, `${workBranch}:${branch}`], onCwdOpts);
+      await git(['fetch', remote], onWorktreeOpts);
+      await git(['push', '--dry-run', '-f', remote, `${workBranch}:${branch}`], onWorktreeOpts);
     }
 
     // Check that the tag does not exist.
     if (tag && !force) {
       debug(`Check that the tag does not exist: ${tag}`);
-      await git(['show-ref', '--verify', `refs/tags/${tag}`], onCwdOpts)
+      await git(['show-ref', '--verify', `refs/tags/${tag}`], onWorktreeOpts)
         .catch(() => false)
         .then(exists => {
           if (exists) {
