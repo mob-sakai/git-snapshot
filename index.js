@@ -3,6 +3,7 @@ const chalk = require('chalk');
 const debug = require('debug')('git-snapshot:');
 const fs = require('fs-extra');
 const tempy = require('tempy');
+const ignore = require('ignore')();
 const git = require('./lib/git');
 
 /**
@@ -73,6 +74,7 @@ async function gitSnapshot(argv) {
           await git(['checkout', '--orphan', workBranch], onWorktreeOpts);
         });
     }
+
     isAddedWorkBranch = true;
 
     // Check empty commit
@@ -103,7 +105,31 @@ async function gitSnapshot(argv) {
     // Remove/copy all files in directory.
     debug(`Remove/copy all files in directory: ${prefix}`);
     await git(['rm', '-rf', '--ignore-unmatch', '.'], onWorktreeOpts);
-    await fs.copy(prefixPath, worktreePath);
+
+    // Create ignore rules from .gitignore.
+    debug('Create ignore rules from `.gitignore`.');
+    ignore.add('.git');
+    const ignoreFilename = path.resolve(prefixPath, '.gitignore');
+    if (fs.exists(ignoreFilename)) {
+      ignore.add(fs.readFileSync(ignoreFilename).toString());
+    } else {
+      const rootDir = await git(['rev-parse', '--show-toplevel'], onCwdOpts);
+      const ignoreFilename = path.resolve(rootDir, '.gitignore');
+      if (fs.exists(ignoreFilename)) {
+        ignore.add(fs.readFileSync(ignoreFilename).toString());
+      }
+    }
+
+    debug(ignore._rules.map(x => chalk.yellow(x.origin)).join(', '));
+
+    // Copy all files.
+    debug('Copy all files');
+    await fs.copy(prefixPath, worktreePath, {
+      filter: (src, _) => {
+        const relativeSrc = path.relative(prefixPath, src);
+        return !relativeSrc || !ignore.ignores(relativeSrc);
+      }
+    });
 
     // Commit files.
     debug(`Commit files:`);
