@@ -21,7 +21,8 @@ const git = require('./lib/git');
  * @param {Boolean} argv.debug output debugging information
  */
 async function gitSnapshot(argv) {
-  const {prefix, branch, message, auther, force, tag, remote, dryRun, cwd} = {cwd: process.cwd(), ...argv};
+  // Apply default options
+  const {prefix, branch, message, auther, force, tag, remote, dryRun, cwd} = {cwd: process.cwd(), prefix: '.', ...argv};
 
   if (argv.debug) {
     // Debug must be enabled before other requires in order to work
@@ -37,6 +38,7 @@ async function gitSnapshot(argv) {
   const onCwdOpts = {cwd};
   const onWorktreeOpts = {cwd: worktreePath};
   const autherOpt = auther ? ['--auther', auther] : [];
+  const messageOpt = message ? ['--message', message] : [];
   const prefixPath = path.resolve(prefix);
   const forceOpt = force ? '--force' : '';
 
@@ -107,7 +109,7 @@ async function gitSnapshot(argv) {
     debug(`Commit files:`);
     await git(['add', '-A', '--ignore-errors'], onWorktreeOpts);
     await git(
-      ['commit', '--amend', '--allow-empty', '--allow-empty-message', '-m', message].concat(autherOpt),
+      ['commit', '--amend', '--allow-empty', '--allow-empty-message'].concat(messageOpt).concat(autherOpt),
       onWorktreeOpts
     );
 
@@ -125,6 +127,8 @@ async function gitSnapshot(argv) {
       if (tag) {
         await git(['push', forceOpt, remote, tag], onWorktreeOpts);
       }
+    } else {
+      await git(['checkout', '-B', branch, workBranch], onWorktreeOpts);
     }
 
     // Completed successflly.

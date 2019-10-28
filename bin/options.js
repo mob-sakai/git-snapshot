@@ -1,14 +1,7 @@
 const yargs = require('yargs')
   .usage(
-    `usage: git snapshot --prefix=<path> --branch=<branch> --message=<message> [--tag=<tag>] [--remote=<repository>] [--dry-run] [--cwd=<path>]`
+    `usage: git snapshot --branch=<branch> [--prefix=<path>] [--message=<commit message>] [--tag=<tag name>] [--remote=<repository url|remote name>] [--dry-run] [--cwd=<path>]`
   )
-  .option('prefix', {
-    requiresArg: true,
-    alias: 'p',
-    describe: 'the name of the subdir to split out',
-    type: 'string',
-    group: 'Required'
-  })
   .option('branch', {
     requiresArg: true,
     alias: 'b',
@@ -16,12 +9,17 @@ const yargs = require('yargs')
     type: 'string',
     group: 'Required'
   })
+  .option('prefix', {
+    requiresArg: true,
+    alias: 'p',
+    describe: 'the name of the subdir to split out',
+    type: 'string'
+  })
   .option('message', {
     requiresArg: true,
     alias: 'm',
     describe: 'commit message',
-    type: 'string',
-    group: 'Required'
+    type: 'string'
   })
   .option('author', {
     requiresArg: true,
@@ -59,12 +57,11 @@ const yargs = require('yargs')
     requiresArg: true,
     alias: 'c',
     describe: 'working directory',
-    type: 'string',
-    default: process.cwd()
+    type: 'string'
   })
   .alias('version', 'v')
   .alias('help', 'h')
-  .demandOption(['prefix', 'message', 'branch']);
+  .demandOption(['branch']);
 
 if (yargs.argv.debug) {
   // Debug must be enabled before other requires in order to work
