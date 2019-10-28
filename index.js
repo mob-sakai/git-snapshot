@@ -62,7 +62,7 @@ async function gitSnapshot(argv) {
     isAddedWorkBranch = true;
 
     // Check empty commit
-    await git(['commit', '--allow-empty', '-m', 'empty commit'].concat(autherOpt), onWorktreeOpts);
+    await git(['commit', '--allow-empty', '-m', 'snapshot commit'].concat(autherOpt), onWorktreeOpts);
 
     // Check permissions for remote branch.
     if (remote) {
