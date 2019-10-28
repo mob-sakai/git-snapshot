@@ -1,3 +1,12 @@
+# [2.2.0-beta.1](https://github.com/mob-sakai/git-snapshot/compare/v2.1.0...v2.2.0-beta.1@beta) (2019-10-28)
+
+
+### Features
+
+* Apply .gitignore filter when copying files ([4d81bff](https://github.com/mob-sakai/git-snapshot/commit/4d81bff3ca7a35e00db5385fd0af1e671df85971))
+* Prefix and message are no longer demand options ([2448076](https://github.com/mob-sakai/git-snapshot/commit/2448076412ec36bf66f13b16eef96e9ea53c3c4b))
+* Support repository url ([668e46a](https://github.com/mob-sakai/git-snapshot/commit/668e46a8f6aaa2ef0157ea57954d9bd375212169))
+
 # [2.1.0](https://github.com/mob-sakai/git-snapshot/compare/v2.0.0...v2.1.0) (2019-10-26)
 
 
