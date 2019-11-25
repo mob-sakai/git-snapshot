@@ -20,7 +20,7 @@
 - Simple and fast
 - Unlike `git subtree split`, you can split from the directory in which you want
 
-## To take snapshot, `subtree split` vs `snapshot`
+## To take a snapshot, `subtree split` vs `snapshot`
 
 |`subtree split`|`snapshot`|
 |--|--|
@@ -103,5 +103,7 @@ MIT
 - GitHub page : https://github.com/mob-sakai/git-snapshot
 - Changelog : https://github.com/mob-sakai/git-snapshot/blob/master/CHANGELOG.md
 - npm page : https://www.npmjs.com/package/git-snapshot
+- gitgraph.js (a git graph tool) : https://github.com/nicoespeon/gitgraph.js/tree/master/packages/gitgraph-js
+- semantic-release (a npm release tool) : https://github.com/semantic-release/semantic-release
 
 [![become_a_sponsor_on_github](https://user-images.githubusercontent.com/12690315/66942881-03686280-f085-11e9-9586-fc0b6011029f.png)](https://github.com/users/mob-sakai/sponsorship)
