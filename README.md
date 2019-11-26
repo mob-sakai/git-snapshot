@@ -24,6 +24,7 @@
 
 |`subtree split`|`snapshot`|
 |--|--|
+|`git subtree split --rejoin --prefix=path/to/target snapshot`|`git snapshot --prefix=path/to/target --branch=snapshot`|
 |:+1: Official command<br>- Contain all history<br>:-1: Long commit log<br>:-1: No squash option<br>:-1: No support for moving target directory|- No history<br>:+1: Short commit log<br>:+1: Fast operation<br>:+1: Any target directory|
 |<img src="https://user-images.githubusercontent.com/12690315/69534929-1ba19a80-0fbe-11ea-8dda-1fd3f95baa81.png" width=400>|<img src="https://user-images.githubusercontent.com/12690315/69534927-19d7d700-0fbe-11ea-94ad-c1f8e7fdb1f6.png" width=400>|
 
