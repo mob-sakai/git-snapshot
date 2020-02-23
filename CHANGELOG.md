@@ -1,3 +1,10 @@
+## [2.2.1](https://github.com/mob-sakai/git-snapshot/compare/v2.2.0...v2.2.1) (2020-02-23)
+
+
+### Bug Fixes
+
+* typo in author (auther) ([fc38c0a](https://github.com/mob-sakai/git-snapshot/commit/fc38c0ab6fb51b2659aa8a40d2e08f38d51edb32))
+
 # [2.2.0](https://github.com/mob-sakai/git-snapshot/compare/v2.1.0...v2.2.0) (2019-10-28)
 
 
