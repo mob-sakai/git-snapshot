@@ -22,7 +22,7 @@ const {git, gitCheckout, gitCopy} = require('./lib/git');
  */
 async function gitSnapshot(argv) {
   // Apply default options
-  const {prefix, branch, message, auther, force, tag, remote, dryRun, cwd} = {cwd: process.cwd(), prefix: '.', ...argv};
+  const {prefix, branch, message, author, force, tag, remote, dryRun, cwd} = {cwd: process.cwd(), prefix: '.', ...argv};
 
   if (argv.debug) {
     // Debug must be enabled before other requires in order to work
@@ -37,7 +37,7 @@ async function gitSnapshot(argv) {
   const workBranch = path.basename(worktreePath);
   const onCwdOpts = {cwd};
   const onWorktreeOpts = {cwd: worktreePath};
-  const autherOpt = auther ? ['--auther', auther] : [];
+  const authorOpt = author ? ['--author', author] : [];
   const messageOpt = message ? ['--message', message] : [];
   const prefixPath = path.resolve(prefix);
   const forceOpt = force ? '--force' : '';
@@ -62,7 +62,7 @@ async function gitSnapshot(argv) {
     isAddedWorkBranch = true;
 
     // Check empty commit
-    await git(['commit', '--allow-empty', '-m', 'snapshot commit'].concat(autherOpt), onWorktreeOpts);
+    await git(['commit', '--allow-empty', '-m', 'snapshot commit'].concat(authorOpt), onWorktreeOpts);
 
     // Check permissions for remote branch.
     if (remote) {
@@ -98,7 +98,7 @@ async function gitSnapshot(argv) {
     debug(`Commit files:`);
     await git(['add', '-A', '--ignore-errors'], onWorktreeOpts);
     await git(
-      ['commit', '--amend', '--allow-empty', '--allow-empty-message'].concat(messageOpt).concat(autherOpt),
+      ['commit', '--amend', '--allow-empty', '--allow-empty-message'].concat(messageOpt).concat(authorOpt),
       onWorktreeOpts
     );
 
