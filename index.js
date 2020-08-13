@@ -38,7 +38,7 @@ async function gitSnapshot(argv) {
   const onCwdOpts = {cwd};
   const onWorktreeOpts = {cwd: worktreePath};
   const authorOpt = author ? ['--author', author] : [];
-  const messageOpt = message ? ['--message', message] : [];
+  const messageOpt = ['--message', message || ' ' ];
   const prefixPath = path.resolve(prefix);
   const forceOpt = force ? '--force' : '';
 
