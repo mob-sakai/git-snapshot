@@ -120,8 +120,8 @@ async function gitSnapshot(argv) {
       await git(['checkout', '-B', branch, workBranch], onWorktreeOpts);
     }
 
-    // Completed successflly.
-    console.log(chalk.green(chalk.bold(`completed successflly${dryRun ? ' in dry-run mode' : ''}`)));
+    // Completed successfully.
+    console.log(chalk.green(chalk.bold(`completed successfully${dryRun ? ' in dry-run mode' : ''}`)));
   } catch (error) {
     failed = true;
     console.error(chalk.red(error.message));
