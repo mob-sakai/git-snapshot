@@ -129,7 +129,7 @@ async function gitSnapshot(argv) {
   } finally {
     // Remove added worktree.
     if (isAddedWorktree) {
-      await git(['worktree', 'remove', '-f', worktreePath], onCwdOpts);
+      await git(['worktree', 'remove', '--force', worktreePath], onCwdOpts);
       await git(['worktree', 'prune'], onCwdOpts);
     }
 
