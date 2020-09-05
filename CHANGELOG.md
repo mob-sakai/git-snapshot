@@ -1,3 +1,12 @@
+## [2.2.2](https://github.com/mob-sakai/git-snapshot/compare/v2.2.1...v2.2.2) (2020-09-05)
+
+
+### Bug Fixes
+
+* Prevent interactive commit message prompt ([eda5693](https://github.com/mob-sakai/git-snapshot/commit/eda5693d14ef2022854de3a1e866f055363fead1))
+* Typo ([e673da8](https://github.com/mob-sakai/git-snapshot/commit/e673da880518a6661d4004b320497d6c8ad48e2c))
+* Use `--force` instead of `-f` for worktree remove command ([6685967](https://github.com/mob-sakai/git-snapshot/commit/668596762f3732bba68b3bdd3ceda0ad52dd6eae))
+
 ## [2.2.1](https://github.com/mob-sakai/git-snapshot/compare/v2.2.0...v2.2.1) (2020-02-23)
 
 
